@@ -1,6 +1,6 @@
 # MTS-VAE
 ### THE PAPER!
-This repository accompanies the work ["Design of diverse, functional mitochondrial targeting sequences across eukaryotic organisms using Variational Autoencoders"](https://www.google.com). This work utilizes local packages of [TargetP 2.0](https://services.healthtech.dtu.dk/services/TargetP-2.0/) and [DeepLoc 2.0](https://services.healthtech.dtu.dk/services/DeepLoc-2.0/) for synthetic data generation and analysis of artificial peptides, respectively. It also utilizes [s4pred](https://github.com/psipred/s4pred) and [modlamp](https://modlamp.org) for analyzing the characteristics of generated peptides, while [UniRep](https://github.com/churchlab/UniRep) embeddings are used for sampling. 
+This repository accompanies the work ["Design of diverse, functional mitochondrial targeting sequences across eukaryotic organisms using Variational Autoencoders"](https://www.google.com). This work utilizes local software packages of [TargetP 2.0](https://services.healthtech.dtu.dk/services/TargetP-2.0/) and [DeepLoc 2.0](https://services.healthtech.dtu.dk/services/DeepLoc-2.0/) for synthetic data generation and analysis of artificial peptides, respectively. It also employs [s4pred](https://github.com/psipred/s4pred) and [modlamp](https://modlamp.org) for analyzing the characteristics of generated peptides, while [UniRep](https://github.com/churchlab/UniRep) embeddings are used for sampling. 
 
 ### Model:
 ![Model](Model.png)
@@ -8,7 +8,7 @@ This repository accompanies the work ["Design of diverse, functional mitochondri
 Install the requirements using: 
 ```
 conda env create -f environment.yml
-conda activate vae
+conda activate py3
 ```
 
 For model training, run:
