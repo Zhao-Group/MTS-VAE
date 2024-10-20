@@ -60,25 +60,6 @@ df['GRAVY'] = gravy
 df['Eisenberg hydrophobicity'] = eisenberg_hydrophobicity
 df = pd.concat([df, df['Sequence'].apply(calculate_amino_acid_fraction).apply(pd.Series)], axis=1)
 
-#Hydrophobic Moment
-descr = PeptideDescriptor(np.array(df['Sequence']),'eisenberg')
-descr.calculate_moment()
-dts_mu = list(descr.descriptor.flatten())
-
-df['Moment'] = dts_mu
-color_dict = {'M': '#d4664f', 'I1': '#ecbd81', 'I2': '#f6f7c6', 'I3': '#b4d382', 'C': '#58a365'} 
-for l in df['Label'].unique():
-    class_data = df[df['Label'] == l]
-    sns.distplot(list(class_data['Moment']), bins = 6, hist=True, kde=True, rug=False, label = l, color = color_dict[l], norm_hist=False)
-
-plt.xlabel('Hydrophobic Moment')
-plt.ylabel('Frequency')
-plt.legend()
-plt.savefig('Dual/data/moment_modlamp.png', dpi = 400, bbox_inches = "tight")
-plt.clf()
-
-df.to_csv('Dual/data/dtps_properties_biopython.csv', index = False)
-
 color_dict = {'M': '#d4664f', 'I1': '#ecbd81', 'I2': '#f6f7c6', 'I3': '#b4d382', 'C': '#58a365'} 
 for l in df['Label'].unique():
     class_data = df[df['Label'] == l]
@@ -134,11 +115,30 @@ legend_elements = [
     Patch(facecolor=color_dict['I1'], label='I1'),
     Patch(facecolor=color_dict['I2'], label='I2'),
     Patch(facecolor=color_dict['I3'], label='I3'),
-    Patch(facecolor=color_dict['C'], label='I4')
+    Patch(facecolor=color_dict['C'], label='C')
 ]
 plt.legend(handles=legend_elements)
 plt.savefig('Dual/data/dtp_organism_aa_fraction_biopython.png', dpi = 400, bbox_inches = "tight")
 plt.clf()
+
+#Hydrophobic Moment
+descr = PeptideDescriptor(np.array(df['Sequence']),'eisenberg')
+descr.calculate_moment()
+dts_mu = list(descr.descriptor.flatten())
+
+df['Moment'] = dts_mu
+color_dict = {'M': '#d4664f', 'I1': '#ecbd81', 'I2': '#f6f7c6', 'I3': '#b4d382', 'C': '#58a365'} 
+for l in df['Label'].unique():
+    class_data = df[df['Label'] == l]
+    sns.distplot(list(class_data['Moment']), bins = 6, hist=True, kde=True, rug=False, label = l, color = color_dict[l], norm_hist=False)
+
+plt.xlabel('Hydrophobic Moment')
+plt.ylabel('Frequency')
+plt.legend()
+plt.savefig('Dual/data/moment_modlamp.png', dpi = 400, bbox_inches = "tight")
+plt.clf()
+
+df.to_csv('Dual/data/dtps_properties_biopython.csv', index = False)
 
 #Structure
 def calculate_secondary_structure_percentages(structure):
@@ -205,7 +205,7 @@ legend_elements = [
     Patch(facecolor=color_dict['I1'], label='I1'),
     Patch(facecolor=color_dict['I2'], label='I2'),
     Patch(facecolor=color_dict['I3'], label='I3'),
-    Patch(facecolor=color_dict['C'], label='I4')
+    Patch(facecolor=color_dict['C'], label='C')
 ]
 plt.legend(handles=legend_elements)
 plt.savefig('Dual/data/dtp_ss_fraction_s4pred.png', dpi = 400, bbox_inches = "tight")
