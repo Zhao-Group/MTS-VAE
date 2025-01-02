@@ -111,7 +111,7 @@ targetp_mtp.columns = new_header_m
 selected_mtp_df = targetp_mtp[targetp_mtp.Prediction.str.contains("mTP")].to_numpy()
 print(selected_mtp_df.shape[0]/targetp_mtp.shape[0])
 
-plt.hist(targetp_mtp['mTP'].astype(np.float),20)
+plt.hist(targetp_mtp['mTP'].astype(float),20)
 plt.xlabel('Probability of being an MTS as predicted by TargetP 2.0')
 plt.ylabel('Number of Artificial sequences')
 
@@ -138,7 +138,7 @@ targetp_ctp.columns = new_header_c
 selected_ctp_df = targetp_ctp[targetp_ctp.Prediction.str.contains("cTP")].to_numpy()
 print(selected_ctp_df.shape[0]/targetp_ctp.shape[0])
 
-plt.hist(targetp_ctp['mTP'].astype(np.float),20)
+plt.hist(targetp_ctp['mTP'].astype(float),20)
 plt.xlabel('Probability of being an MTS as predicted by TargetP 2.0')
 plt.ylabel('Number of Artificial sequences')
 

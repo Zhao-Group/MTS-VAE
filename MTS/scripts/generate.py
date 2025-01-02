@@ -6,12 +6,8 @@ import re
 from Bio import SeqIO
 from matplotlib import pyplot as plt
 import torch.nn as nn
-import torch.optim as optim
 from torch.nn import functional as F
-import torchvision
-from torch.autograd import Variable
 import torch
-from torchvision import transforms
 
 def write_fasta(name, sequence_df):
     out_file = open(name + '.fasta', "w")

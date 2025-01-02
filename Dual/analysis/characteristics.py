@@ -153,6 +153,7 @@ def calculate_secondary_structure_percentages(structure):
     
     return c_percentage, h_percentage, e_percentage
 
+#Feed dtps.fas to S4PRED to obtain dtps_ss.fas (https://github.com/psipred/s4pred)
 data = {"Name": [], "Sequence": [], "Structure": []}
 with open("Dual/data/dtps_ss.fas", "r") as file:
     lines = file.readlines()

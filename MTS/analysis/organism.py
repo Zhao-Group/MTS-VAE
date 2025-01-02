@@ -106,6 +106,36 @@ df_f['Eisenberg hydrophobicity'] = eisenberg_hydrophobicity
 df_f = pd.concat([df_f, df_f['Sequence'].apply(calculate_amino_acid_fraction).apply(pd.Series)], axis=1)
 labels = ['H. sapiens', 'R. toruloides', 'N. tabacum', 'S. cerevisiae']
 
+#Amino acid composition
+positions = list(range(1, 21))
+gap = 0.2
+widths = 0.15
+amino_acid_columns = df_f.columns[-20:]
+
+plt.figure(figsize=(12, 6))
+plt.boxplot(df_f[df_f['Label'] == 1][amino_acid_columns], positions=[pos-1.5*gap for pos in positions], widths=widths, patch_artist=True, boxprops=dict(facecolor='lightblue'), flierprops={'markersize': 2})
+plt.boxplot(df_f[df_f['Label'] == 2][amino_acid_columns], positions=[pos-0.5*gap for pos in positions], widths=widths, patch_artist=True, boxprops=dict(facecolor='bisque'), flierprops={'markersize': 2})
+plt.boxplot(df_f[df_f['Label'] == 3][amino_acid_columns], positions=[pos+0.5*gap for pos in positions], widths=widths, patch_artist=True, boxprops=dict(facecolor='#A2DEA5'), flierprops={'markersize': 2})
+plt.boxplot(df_f[df_f['Label'] == 4][amino_acid_columns], positions=[pos+1.5*gap for pos in positions], widths=widths, patch_artist=True, boxprops=dict(facecolor='mistyrose'), flierprops={'markersize': 2})
+    
+# Set the title and labels for the plot
+plt.xticks(range(1, len(amino_acid_columns) + 1), amino_acid_columns)
+plt.xlabel('Amino Acids')
+plt.ylabel('Fraction')
+plt.grid(visible=False, axis='both')
+
+legend_elements = [
+    Patch(facecolor='lightblue', label=labels[0]),
+    Patch(facecolor='bisque', label=labels[1]),
+    Patch(facecolor='#A2DEA5', label=labels[2]),
+    Patch(facecolor='mistyrose', label=labels[3])
+]
+plt.legend(handles=legend_elements)
+plt.savefig('MTS/data/organism_aa_fraction_biopython.png', dpi = 400, bbox_inches = "tight")
+plt.clf()
+
+plt.figure(figsize=(6.4, 4.8))
+
 #Hydrophobic Moment
 descr = PeptideDescriptor(np.array(df_f['Sequence']),'eisenberg')
 descr.calculate_moment()
@@ -139,36 +169,6 @@ plt.ylabel('Count')
 plt.legend()
 plt.savefig('MTS/data/organism_net_charge_biopython.png', dpi = 400, bbox_inches = "tight")
 plt.clf()
-
-#Amino acid composition
-positions = list(range(1, 21))
-gap = 0.2
-widths = 0.15
-amino_acid_columns = df_f.columns[-20:]
-
-plt.figure(figsize=(12, 6))
-plt.boxplot(df_f[df_f['Label'] == 1][amino_acid_columns], positions=[pos-1.5*gap for pos in positions], widths=widths, patch_artist=True, boxprops=dict(facecolor='lightblue'), flierprops={'markersize': 2})
-plt.boxplot(df_f[df_f['Label'] == 2][amino_acid_columns], positions=[pos-0.5*gap for pos in positions], widths=widths, patch_artist=True, boxprops=dict(facecolor='bisque'), flierprops={'markersize': 2})
-plt.boxplot(df_f[df_f['Label'] == 3][amino_acid_columns], positions=[pos+0.5*gap for pos in positions], widths=widths, patch_artist=True, boxprops=dict(facecolor='#A2DEA5'), flierprops={'markersize': 2})
-plt.boxplot(df_f[df_f['Label'] == 4][amino_acid_columns], positions=[pos+1.5*gap for pos in positions], widths=widths, patch_artist=True, boxprops=dict(facecolor='mistyrose'), flierprops={'markersize': 2})
-    
-# Set the title and labels for the plot
-plt.xticks(range(1, len(amino_acid_columns) + 1), amino_acid_columns)
-plt.xlabel('Amino Acids')
-plt.ylabel('Fraction')
-plt.grid(visible=False, axis='both')
-
-legend_elements = [
-    Patch(facecolor='lightblue', label=labels[0]),
-    Patch(facecolor='bisque', label=labels[1]),
-    Patch(facecolor='#A2DEA5', label=labels[2]),
-    Patch(facecolor='mistyrose', label=labels[3])
-]
-plt.legend(handles=legend_elements)
-plt.savefig('MTS/data/organism_aa_fraction_biopython.png', dpi = 400, bbox_inches = "tight")
-plt.clf()
-
-plt.figure(figsize=(6.4, 4.8))
 
 #GRAVY
 for i in range(len(labels)):

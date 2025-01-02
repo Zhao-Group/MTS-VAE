@@ -6,10 +6,7 @@ from matplotlib import pyplot as plt
 import torch.nn as nn
 import torch.optim as optim
 from torch.nn import functional as F
-import torchvision
-from torch.autograd import Variable
 import torch
-from torchvision import transforms
 
 with open('MTS/data/tv_sim_split_train.pkl', 'rb') as f:
     X_train = pickle.load(f)
