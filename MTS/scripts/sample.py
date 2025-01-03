@@ -149,44 +149,6 @@ cc_unirep_umap = reducer.transform(cluster_center)
 cc_unirep_umap = pd.DataFrame(data=cc_unirep_umap, columns=['x1', 'x2'])
 print(cc_unirep_umap.shape)
 
-#amts_unirep_umap = reducer.transform(embd_for_amts_clustering)
-#amts_unirep_umap = pd.DataFrame(data=amts_unirep_umap, columns=['x1', 'x2'])
-#print(amts_unirep_umap.shape)
-
-amts_to_test_h = pd.read_csv('amts_to_test_h.csv')  
-amts_to_test_sc = pd.read_csv('amts_to_test_sc.csv')  
-amts_to_test_rt = pd.read_csv('amts_to_test_rt.csv')  
-amts_to_test_nt = pd.read_csv('amts_to_test_nt.csv')  
-
-frames = [amts_to_test_h, amts_to_test_sc, amts_to_test_rt, amts_to_test_nt]
-amts_to_test = pd.concat(frames).reset_index(drop=True)
-
-arrays = np.load('MTS/data/artificial_mts_for_organisms_' + str(file_no) + '.npz', allow_pickle=True) 
-embd_for_amts_to_test = []
-amts_to_test_data_embd_arranged = []
-for i in list(arrays.keys()):
-    if i in list(amts_to_test['name']):
-        amts_to_test_data_embd_arranged.append(list(amts_to_test.loc[amts_to_test['name'] == i].values[0]))
-        embd_for_amts_to_test.append(arrays[i].item()['avg'])
-        
-amts_to_test_data_embd_arranged = pd.DataFrame(amts_to_test_data_embd_arranged, columns = ['name','sequence','mTP Probability','Cleavage Probability','length','org_label','distance_cluster_center','Distance_to_closest_natural_mts'])
-amts_to_test_unirep_umap = reducer.transform(embd_for_amts_to_test)
-amts_to_test_unirep_umap = pd.DataFrame(data=amts_to_test_unirep_umap, columns=['x1', 'x2'])
-print(amts_to_test_unirep_umap.shape)
-
-org_label_rep = []
-for i in range(np.shape(amts_to_test_data_embd_arranged)[0]):
-    if 'YEAST' == amts_to_test_data_embd_arranged['org_label'][i]:
-        org_label_rep.append(1)
-    elif 'Rhoto' == amts_to_test_data_embd_arranged['org_label'][i]:
-        org_label_rep.append(2)
-    elif 'HUMAN' == amts_to_test_data_embd_arranged['org_label'][i]:
-        org_label_rep.append(3)
-    elif 'TOBAC' == amts_to_test_data_embd_arranged['org_label'][i]:
-        org_label_rep.append(4)
-        
-amts_to_test_data_embd_arranged['org_label_rep'] = org_label_rep
-
 from scipy.stats import gaussian_kde
 import matplotlib.cm as cm 
 
@@ -212,10 +174,6 @@ for g in np.unique(cluster_data_embd_arranged_df['label']):
 cdict = {1: 'magenta', 2: 'orange', 3: 'blue', 4: 'green'}
 for g in np.unique(cluster_data_embd_arranged_df['label']):
     ax.scatter(cc_unirep_umap['x1'][g-1], cc_unirep_umap['x2'][g-1], c = cdict[g], label = g, marker = '*', s = 200)
-
-for g in np.unique(amts_to_test_data_embd_arranged['org_label_rep']):
-    ix = np.where(amts_to_test_data_embd_arranged['org_label_rep'] == g)
-    ax.scatter(amts_to_test_unirep_umap['x1'].loc[ix], amts_to_test_unirep_umap['x2'].loc[ix], c = cdict[g], marker = 'P', label = g, s = 50, alpha = 1)
 
 plt.xlabel('UMAP Dimension 1')
 plt.ylabel('UMAP Dimension 2')

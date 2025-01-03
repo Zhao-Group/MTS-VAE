@@ -47,7 +47,6 @@ python MTS/analysis/seq_identity.py
 python MTS/analysis/deeploc2.py
 python MTS/analysis/characteristics.py
 python MTS/analysis/organism.py
-python MTS/scripts/in_vivo.py
 
 
 python Dual/analysis/preprocess.py
