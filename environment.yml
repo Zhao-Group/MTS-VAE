@@ -12,6 +12,7 @@ dependencies:
   - libffi=3.4.4=h6a678d5_1
   - libgcc=14.2.0=h77fa898_1
   - libgcc-ng=14.2.0=h69a702a_1
+  - libgfortran=3.0.0=1
   - libgfortran-ng=11.2.0=h00389a5_1
   - libgfortran5=11.2.0=h1234567_1
   - libgomp=14.2.0=h77fa898_1
@@ -20,6 +21,7 @@ dependencies:
   - ncurses=6.4=h6a678d5_0
   - numpy=2.0.1=py39heeff2f4_1
   - numpy-base=2.0.1=py39h8a23956_1
+  - openblas=0.3.4=ha44fe06_0
   - openssl=3.0.15=h5eee18b_0
   - pip=24.2=py39h06a4308_0
   - python=3.9.16=h955ad1f_3
@@ -45,6 +47,7 @@ dependencies:
       - jinja2==3.1.5
       - joblib==1.4.2
       - kiwisolver==1.4.7
+      - levenshtein==0.26.1
       - llvmlite==0.43.0
       - lxml==5.3.0
       - markupsafe==3.0.2
@@ -76,6 +79,7 @@ dependencies:
       - pyparsing==3.2.1
       - python-dateutil==2.9.0.post0
       - pytz==2024.2
+      - rapidfuzz==3.11.0
       - requests==2.32.3
       - scikit-learn==1.6.0
       - scipy==1.13.1
